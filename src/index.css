@@ -1,0 +1,103 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
+
+:root {
+  --color-primary: #6A46A8;
+  --light: #997DE3; 
+  --color-secondary: #F5F5F5; 
+  --color-text: #0A0A0A;      
+}
+
+.tajawal-extralight {
+  font-family: "Tajawal", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.tajawal-light {
+  font-family: "Tajawal", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.tajawal-regular {
+  font-family: "Tajawal", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.tajawal-medium {
+  font-family: "Tajawal", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.tajawal-bold {
+  font-family: "Tajawal", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.tajawal-extrabold {
+  font-family: "Tajawal", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.tajawal-black {
+  font-family: "Tajawal", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+
+/* Additional responsive improvements */
+.header_container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Ensure smooth transitions for all interactive elements */
+* {
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+/* Focus styles for accessibility */
+button:focus,
+a:focus {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+/* Responsive text scaling */
+@media (max-width: 640px) {
+  .header_container {
+    min-height: 500px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header_container {
+    min-height: 450px;
+  }
+}
+
+/* Ensure proper RTL support */
+[dir="rtl"] .header_container {
+  direction: rtl;
+}
+
+/* Smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Prevent horizontal overflow */
+body {
+  overflow-x: hidden;
+  box-sizing: border-box;
+  background-color: #F3F3F3;
+  padding: 0px;
+}
