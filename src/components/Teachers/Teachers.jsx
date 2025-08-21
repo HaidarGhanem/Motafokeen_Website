@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
+import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 export default function TeachersCarousel() {
   const [teachers, setTeachers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // unified photo
   const teacherPhoto = "/default-teacher.png";
 
   useEffect(() => {
@@ -69,25 +69,32 @@ export default function TeachersCarousel() {
   return (
     <div className="mt-[80px] w-full px-4 relative">
       <Swiper
-        modules={[Navigation]}
-        spaceBetween={5} // 🔹 smaller gap between cards
-        slidesPerView={2}
+        modules={[Navigation, Pagination]}
+        spaceBetween={20}
+        slidesPerView={1}
+        centeredSlides={true} // ✅ force center on mobile
+        pagination={{
+          clickable: true,
+          bulletClass: "swiper-pagination-bullet custom-bullet",
+          bulletActiveClass:
+            "swiper-pagination-bullet-active custom-bullet-active",
+        }}
         navigation={{
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev",
         }}
         breakpoints={{
-          640: { slidesPerView: 1 },
-          768: { slidesPerView: 1 },
-          1024: { slidesPerView: 4 },
+          640: { slidesPerView: 1, centeredSlides: true }, // mobile centered
+          768: { slidesPerView: 2, centeredSlides: false }, // tablet normal
+          1024: { slidesPerView: 4, centeredSlides: false }, // desktop normal
         }}
-        className="!pb-12"
+        className="!pb-16"
       >
         {teachers.map((t) => (
-          <SwiperSlide key={t.id} className="flex justify-center">
-            <div className="main_card w-[95%] max-w-[350px] rounded-[20px] flex flex-col items-center bg-white shadow-md transition-all duration-300 hover:scale-105">
+          <SwiperSlide key={t.id}>
+            <div className="main_card max-w-[320px] w-full mx-auto rounded-[20px] flex flex-col items-center bg-white shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105">
               {/* image */}
-              <div className="w-full h-[230px] overflow-hidden rounded-t-[20px] bg-gray-300 flex items-center justify-center">
+              <div className="w-full h-[230px] overflow-hidden rounded-t-[20px] bg-gray-200 flex items-center justify-center">
                 <img
                   src={teacherPhoto}
                   alt={t.name}
@@ -97,7 +104,9 @@ export default function TeachersCarousel() {
 
               {/* content */}
               <div className="flex flex-col justify-center text-center p-4">
-                <h3 className="tajawal-bold text-[18px]">{t.name}</h3>
+                <h3 className="tajawal-bold text-[18px] text-[var(--color-primary)]">
+                  {t.name}
+                </h3>
                 <p className="tajawal-regular text-gray-600 text-[15px] mt-1">
                   {t.subject}
                 </p>
@@ -113,6 +122,23 @@ export default function TeachersCarousel() {
 
       {/* Custom Swiper styles */}
       <style jsx global>{`
+        .custom-bullet {
+          background-color: #d1d5db;
+          opacity: 1;
+          width: 10px;
+          height: 10px;
+          margin: 0 6px !important;
+          transition: all 0.3s ease;
+          border-radius: 50%;
+        }
+        .custom-bullet-active {
+          background-color: var(--color-primary) !important;
+          width: 12px;
+          height: 12px;
+        }
+        .swiper-pagination {
+          bottom: 0px !important;
+        }
         .swiper-button-next,
         .swiper-button-prev {
           color: var(--color-primary) !important;
@@ -120,7 +146,7 @@ export default function TeachersCarousel() {
           width: 40px;
           height: 40px;
           border-radius: 50%;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
           transition: all 0.3s ease;
         }
         .swiper-button-next:hover,

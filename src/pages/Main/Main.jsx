@@ -53,50 +53,48 @@ const Main = () => {
       />
 
       <div className="mt-[80px] flex justify-center items-center flex-wrap gap-[40px]">
-        <div className="main_card mt-[-20px] w-[250px] h-[382px] rounded-[20px] flex flex-col justify-around items-center gap-[40px] bg-white">
-          <img src="/21.png" alt="Mission" />
-          <div className="flex flex-col justify-center items-center gap-[20px] text-[18px] text-center text-[--color-text]">
-            <h3 className="tajawal-bold">الرسالة</h3>
-            <h3 className="tajawal-regular mx-4">
-              تَقديم تعليم مُتميِّز يُساعِد الطلاب على تحقيقِ إمكاناتهم الكاملة
-              وإعدادهم لمستقبل مشرقٍ.
-            </h3>
-          </div>
-        </div>
+  {[
+    {
+      img: "/21.png",
+      alt: "Mission",
+      title: "الرسالة",
+      text: "تَقديم تعليم مُتميِّز يُساعِد الطلاب على تحقيقِ إمكاناتهم الكاملة وإعدادهم لمستقبل مشرقٍ.",
+    },
+    {
+      img: "/22.png",
+      alt: "Vision",
+      title: "الرؤية",
+      text: "أن نكون المدرسة الرائدة في التعليم المُتميّز والابتكار التربويّ في المنطقة.",
+    },
+    {
+      img: "/23.png",
+      alt: "Values",
+      title: "القيم",
+      text: "التميز، الإبداع، الاحترام، المسؤولية، والعمل الجماعيّ هي أساس نهجِنا التعليميّ.",
+    },
+    {
+      img: "/23.png",
+      alt: "Excellence",
+      title: "التميز",
+      text: "نسعى للتَّميُّزِ في جميع جوانب العملية التعليمية من خلال أحدث الطُرق والتقنيات.",
+    },
+  ].map(({ img, alt, title, text }) => (
+    <div
+      key={title}
+      className="main_card mt-[-20px] w-[250px] h-[382px] rounded-[20px] flex flex-col justify-between items-center bg-white p-6"
+    >
+      {/* Image */}
+      <img src={img} alt={alt} className="w-[100px] h-[100px] object-contain" />
 
-        <div className="main_card mt-[-20px] w-[250px] h-[382px] rounded-[20px] flex flex-col justify-around items-center gap-[40px] bg-white">
-          <img src="/22.png" alt="Vision" />
-          <div className="flex flex-col justify-center items-center gap-[20px] text-[18px] text-center text-[--color-text]">
-            <h3 className="tajawal-bold">الرؤية</h3>
-            <h3 className="tajawal-regular mx-4">
-              أن نكون المدرسة الرائدة في التعليم المُتميّز والابتكار التربويّ في
-              المنطقة.
-            </h3>
-          </div>
-        </div>
-
-        <div className="main_card mt-[-20px] w-[250px] h-[382px] rounded-[20px] flex flex-col justify-around items-center gap-[40px] bg-white">
-          <img src="/23.png" alt="Values" />
-          <div className="flex flex-col justify-center items-center gap-[20px] text-[18px] text-center text-[--color-text]">
-            <h3 className="tajawal-bold">القيم</h3>
-            <h3 className="tajawal-regular mx-4">
-              التميز، الإبداع، الاحترام، المسؤولية، والعمل الجماعيّ هي أساس نهجِنا
-              التعليميّ.
-            </h3>
-          </div>
-        </div>
-
-        <div className="main_card mt-[-20px] w-[250px] h-[382px] rounded-[20px] flex flex-col justify-around items-center gap-[40px] bg-white">
-          <img src="/23.png" alt="Excellence" />
-          <div className="flex flex-col justify-center items-center gap-[20px] text-[18px] text-center text-[--color-text]">
-            <h3 className="tajawal-bold">التميز</h3>
-            <h3 className="tajawal-regular mx-4">
-              نسعى للتَّميُّزِ في جميع جوانب العملية التعليمية من خلال أحدث الطُرق
-              والتقنيات.
-            </h3>
-          </div>
-        </div>
+      {/* Text */}
+      <div className="flex flex-col flex-1 justify-baseline pt-10 items-center gap-4 text-[18px] text-center text-[--color-text]">
+        <h3 className="tajawal-bold">{title}</h3>
+        <h3 className="tajawal-regular">{text}</h3>
       </div>
+    </div>
+  ))}
+</div>
+
 
       <Title
         title="المناهج التعليمية"
@@ -201,7 +199,11 @@ const Main = () => {
     <div className="flex justify-center mt-6">
       <button
         type="submit"
-        className="w-full md:w-[580px] h-[60px] md:h-[76px] text-[20px] md:text-[26px] rounded-[24px] bg-[var(--color-primary)] text-white hover:bg-[var(--color-primary-dark)] transition-colors duration-300"
+        className="tajawal-bold w-full md:w-[580px] h-[60px] md:h-[76px] text-[20px] md:text-[26px] rounded-[24px] 
+                  bg-[#6A46A8] text-white 
+                  hover:bg-[#56378A] 
+                  transition-colors duration-300 
+                  focus:outline-none focus:ring-4 focus:ring-[#6A46A8]/40 active:scale-95"
       >
         إرسال
       </button>

@@ -1,4 +1,3 @@
-import React from 'react'
 
 const Footer = () => {
     return (
@@ -20,33 +19,36 @@ const Footer = () => {
 
             {/* App Download */}
             <div className="flex flex-col justify-between items-end md:items-center">
-                <h1 className="tajawal-bold text-[22px] text-white">حمّل تطبيقنا</h1>
-                <button className="h-[43px] w-[180px] bg-[var(--color-primary)] text-white tajwal-regular rounded-[24px] mt-6">
+            <h1 className="tajawal-bold text-[22px] text-white">حمّل تطبيقنا</h1>
+            <button
+                className="h-[43px] w-[180px] bg-[var(--color-primary)] text-white tajawal-regular rounded-[24px] mt-6 
+                        flex items-center justify-center px-4 text-[16px]"
+            >
                 اضغط هنا للتحميل
-                </button>
+            </button>
             </div>
 
             {/* Contact Info */}
-            <div className="flex flex-col items-end md:items-center text-white text-right">
-                <h1 className="tajawal-bold text-[22px] text-white">تواصل معنا</h1>
-                <div className="flex flex-col gap-4 mt-5">
+            <div className="flex flex-col items-end text-white text-right">
+            <h1 className="tajawal-bold text-[22px] text-white">تواصل معنا</h1>
+            <div className="flex flex-col gap-4 mt-5">
                 <div className="flex flex-row-reverse items-center gap-3">
-                    <img src="/03.png" alt="location" className="w-[20px] h-[20px]" />
-                    <h3>حمص، سوريا</h3>
-                </div>
-                <div className="flex flex-row-reverse items-center gap-3">
-                    <img src="/01.png" alt="email" className="w-[20px] h-[20px]" />
-                    <h3>example@gmail.com</h3>
+                <img src="/03.png" alt="location" className="w-[20px] h-[20px]" />
+                <h3>حمص، سوريا</h3>
                 </div>
                 <div className="flex flex-row-reverse items-center gap-3">
-                    <img src="/02.png" alt="phone" className="w-[20px] h-[20px]" />
-                    <h3>+963994785602</h3>
+                <img src="/01.png" alt="email" className="w-[20px] h-[20px]" />
+                <h3>example@gmail.com</h3>
                 </div>
                 <div className="flex flex-row-reverse items-center gap-3">
-                    <img src="/02.png" alt="landline" className="w-[20px] h-[20px]" />
-                    <h3>0312621636</h3>
+                <img src="/02.png" alt="phone" className="w-[20px] h-[20px]" />
+                <h3>+963994785602</h3>
                 </div>
+                <div className="flex flex-row-reverse items-center gap-3">
+                <img src="/02.png" alt="landline" className="w-[20px] h-[20px]" />
+                <h3>0312621636</h3>
                 </div>
+            </div>
             </div>
 
             {/* School Info */}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
@@ -12,6 +12,7 @@ export default function MainCarousel() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [slidesPerView, setSlidesPerView] = useState(1);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -21,12 +22,11 @@ export default function MainCarousel() {
           throw new Error("Network response was not ok");
         }
         const result = await response.json();
-        
+
         if (result.success) {
-          // Ensure all images have absolute URLs
-          const postsWithImages = result.data.map(post => ({
+          const postsWithImages = result.data.map((post) => ({
             ...post,
-            img: post.img || `http://localhost:3000/dashboard/web/${post.id}/image`
+            img: post.img || `http://localhost:3000/dashboard/web/${post.id}/image`,
           }));
           setPosts(postsWithImages);
         } else {
@@ -76,28 +76,34 @@ export default function MainCarousel() {
         modules={[Navigation, Pagination]}
         spaceBetween={20}
         slidesPerView={1}
+        centeredSlides={true}
         pagination={{
           clickable: true,
           bulletClass: "swiper-pagination-bullet custom-bullet",
           bulletActiveClass: "swiper-pagination-bullet-active custom-bullet-active",
         }}
         navigation={{
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
         }}
-        centeredSlides={true}
-        initialSlide={1}
+        initialSlide={0}
         onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
-        onInit={(swiper) => setActiveIndex(swiper.activeIndex)}
-        breakpoints={{
-          640: { slidesPerView: 1.3 },
-          768: { slidesPerView: 2 },
-          1024: { slidesPerView: 3 },
+        onInit={(swiper) => {
+          setActiveIndex(swiper.activeIndex);
+          setSlidesPerView(swiper.params.slidesPerView);
         }}
-        className="!pb-20"
+        onResize={(swiper) => setSlidesPerView(swiper.params.slidesPerView)}
+        breakpoints={{
+          640: { slidesPerView: 1, centeredSlides: true },
+          768: { slidesPerView: 2, centeredSlides: false },
+          1024: { slidesPerView: 3, centeredSlides: false },
+        }}
+        className="!pb-20 max-w-[395px] md:max-w-full"
       >
         {posts.map((item, index) => {
-          const isCenter = index === activeIndex;
+          // 👇 logic to detect the "middle" card
+          const middleIndex = activeIndex + Math.floor(slidesPerView / 2);
+          const isCenter = index === middleIndex;
 
           return (
             <SwiperSlide key={item.id} className="flex justify-center">
@@ -108,7 +114,7 @@ export default function MainCarousel() {
                     : "h-[460px] scale-85 md:h-[432px] md:scale-90"
                 }`}
               >
-                {/* Image with enhanced handling */}
+                {/* Image */}
                 <div className="w-full h-[240px] overflow-hidden rounded-t-[20px] bg-gray-100 flex items-center justify-center">
                   <img
                     src={item.img}
@@ -117,7 +123,8 @@ export default function MainCarousel() {
                     onError={(e) => {
                       e.target.onerror = null;
                       e.target.src = "/default-post-image.png";
-                      e.target.className = "w-full h-full object-contain p-4 bg-gray-200";
+                      e.target.className =
+                        "w-full h-full object-contain p-4 bg-gray-200";
                     }}
                     loading="lazy"
                   />
@@ -125,13 +132,21 @@ export default function MainCarousel() {
 
                 {/* Content */}
                 <div className="flex flex-col justify-start text-right p-4 w-full h-[calc(100%-240px)]">
-                  <h3 className={`tajawal-bold line-clamp-2 ${isCenter ? "text-[24px]" : "text-[20px]"} mb-2`}>
+                  <h3
+                    className={`tajawal-bold line-clamp-2 ${
+                      isCenter ? "text-[24px]" : "text-[20px]"
+                    } mb-2`}
+                  >
                     {item.title}
                   </h3>
-                  <p className={`tajawal-regular text-gray-600 line-clamp-3 ${isCenter ? "text-[18px]" : "text-[16px]"}`}>
+                  <p
+                    className={`tajawal-regular text-gray-600 line-clamp-3 ${
+                      isCenter ? "text-[18px]" : "text-[16px]"
+                    }`}
+                  >
                     {item.description}
                   </p>
-                
+
                   {/* Footer */}
                   <div className="mt-auto pt-4 w-full">
                     <div className="flex justify-between items-center border-t border-gray-100 pt-3">
@@ -139,8 +154,16 @@ export default function MainCarousel() {
                         {item.writer}
                       </p>
                       <div className="flex items-center gap-2">
-                        <CiCalendar className={`${isCenter ? "w-6 h-6" : "w-5 h-5"} text-gray-500`} />
-                        <span className={`tajawal-regular text-gray-500 ${isCenter ? "text-[16px]" : "text-[14px]"}`}>
+                        <CiCalendar
+                          className={`${
+                            isCenter ? "w-6 h-6" : "w-5 h-5"
+                          } text-gray-500`}
+                        />
+                        <span
+                          className={`tajawal-regular text-gray-500 ${
+                            isCenter ? "text-[16px]" : "text-[14px]"
+                          }`}
+                        >
                           {item.date}
                         </span>
                       </div>
@@ -193,7 +216,7 @@ export default function MainCarousel() {
           width: 50px;
           height: 50px;
           border-radius: 50%;
-          box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
           transition: all 0.3s ease;
         }
         .swiper-button-next:hover,

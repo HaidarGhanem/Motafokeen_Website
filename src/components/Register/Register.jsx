@@ -51,13 +51,13 @@ const RegisterSteps = () => {
         خطوات التسجيل
       </h2>
 
-      {/* Timeline line */}
+      {/* Timeline line (desktop only) */}
       <div className="hidden md:block absolute top-24 bottom-0 left-1/2 w-[2px] bg-gray-300 transform -translate-x-1/2"></div>
 
       {/* Steps */}
       <div className="flex flex-col gap-12">
         {steps.map((step, index) => {
-          const isRight = index % 2 === 0; // odd/even alternating
+          const isRight = index % 2 === 0; // alternate sides
           return (
             <div
               key={step.id}
@@ -65,7 +65,19 @@ const RegisterSteps = () => {
                 isRight ? "md:justify-end" : "md:justify-start"
               } md:relative`}
             >
-              {/* Content */}
+              {/* Number Circle */}
+              <div
+                className={`
+                  flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 
+                  rounded-full bg-[var(--color-primary)] text-white tajawal-bold text-lg z-10
+                  mb-4 md:mb-0 md:mx-4
+                  ${isRight ? "md:order-2" : "md:order-1"}
+                `}
+              >
+                {step.id}
+              </div>
+
+              {/* Card Content */}
               <div
                 className={`bg-white border border-gray-200 rounded-lg shadow-sm p-6 max-w-md w-full text-right ${
                   isRight ? "md:mr-10" : "md:ml-10"
@@ -79,11 +91,6 @@ const RegisterSteps = () => {
                     <li key={idx}>{d}</li>
                   ))}
                 </ul>
-              </div>
-
-              {/* Number Circle */}
-              <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-purple-200 text-purple-800 tajawal-bold text-lg z-10 mt-4 md:mt-0">
-                {step.id}
               </div>
             </div>
           );
