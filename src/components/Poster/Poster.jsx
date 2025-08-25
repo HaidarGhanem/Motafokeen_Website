@@ -12,7 +12,7 @@ const Poster = ({ content }) => {
           <img
             src={item.img}
             alt={item.title}
-            className="w-full h-56 sm:h-72 md:h-80 lg:h-[350px] md:object-fill"
+            className="w-full h-56 sm:h-65 md:h-80 lg:h-[350px] md:object-fill"
           />
 
           {/* Content */}
