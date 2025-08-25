@@ -2,18 +2,20 @@ import React from "react";
 
 const Poster = ({ content }) => {
   return (
-    <div className="flex flex-col md:flex-row md:flex-wrap justify-center items-center px-4 sm:px-6 lg:px-12 gap-12">
+    <div className="flex flex-col md:flex-row md:flex-wrap justify-center items-center px-4 sm:px-6 lg:px-12 gap-8 md:gap-12">
       {content.map((item, index) => (
         <div
           key={index}
-          className="bg-white rounded-2xl shadow-md border border-[var(--color-secondary)] overflow-hidden md:mx-30 w-full"
+          className="bg-white rounded-2xl shadow-md border border-[var(--color-secondary)] overflow-hidden w-full max-w-md mx-auto"
         >
-          {/* Image */}
-          <img
-            src={item.img}
-            alt={item.title}
-            className="w-full h-56 sm:h-58 md:h-80 lg:h-[350px] md:object-fill"
-          />
+          {/* Image Container with Fixed Aspect Ratio */}
+          <div className="relative w-full h-0 pb-[56.25%] sm:pb-[60%] md:pb-[65%] overflow-hidden">
+            <img
+              src={item.img}
+              alt={item.title}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          </div>
 
           {/* Content */}
           <div className="p-4 sm:p-6 lg:p-8 text-right">
