@@ -17,7 +17,7 @@ export default function MainCarousel() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch("http://localhost:3000/dashboard/web/carousel");
+        const response = await fetch("https://backend-motafokeen-ajrd.onrender.com/dashboard/web/carousel");
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -26,7 +26,7 @@ export default function MainCarousel() {
         if (result.success) {
           const postsWithImages = result.data.map((post) => ({
             ...post,
-            img: post.img || `http://localhost:3000/dashboard/web/${post.id}/image`,
+            img: post.img || `https://backend-motafokeen-ajrd.onrender.com/dashboard/web/${post.id}/image`,
           }));
           setPosts(postsWithImages);
         } else {

@@ -15,7 +15,7 @@ export default function TeachersCarousel() {
   useEffect(() => {
     const fetchTeachers = async () => {
       try {
-        const response = await fetch("http://localhost:3000/dashboard/teachers");
+        const response = await fetch("https://backend-motafokeen-ajrd.onrender.com/dashboard/teachers");
         if (!response.ok) throw new Error("Network response was not ok");
         const result = await response.json();
 

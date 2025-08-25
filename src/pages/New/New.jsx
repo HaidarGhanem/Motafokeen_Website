@@ -16,7 +16,7 @@ const News = () => {
   useEffect(() => {
     const fetchContent = async () => {
       try {
-        const response = await fetch("http://localhost:3000/dashboard/web/carousel");
+        const response = await fetch("https://backend-motafokeen-ajrd.onrender.com/dashboard/web/carousel");
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -25,7 +25,7 @@ const News = () => {
 
         if (result.success) {
           const formattedContent = result.data.map((item) => ({
-            img: item.img || `http://localhost:3000/dashboard/web/${item.id}/image`,
+            img: item.img || `https://backend-motafokeen-ajrd.onrender.com/dashboard/web/${item.id}/image`,
             title: item.title || "بدون عنوان",
             content: item.description || "لا يوجد وصف متاح",
           }));
